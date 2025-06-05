@@ -55,14 +55,14 @@ function Template() {
                             alignItems: "center",
                             flexDirection: "column"
                         }}>
-                            <Typography sx={{fontSize: '32px', color: '#fff', fontWeight: 600, textWrap: 'nowrap'}}>
+                            <Typography sx={{fontSize: '26px', color: '#fff', fontWeight: 600, textWrap: 'nowrap'}}>
                                 || જય બાબા સ્વામી ||
                             </Typography>
-                            <Typography sx={{fontSize: '25px', color: '#fff', fontWeight: 600, my: 2}}>
+                            <Typography sx={{fontSize: '20px', color: '#fff', fontWeight: 600, mt: 2}}>
                                 સમર્પણ પરિવાર વરાછા ઝોન, સુરત.
                             </Typography>
-                            <Box>
-                                <img src={text}/>
+                            <Box sx={{height: '200px'}}>
+                                <img src={text} style={{width: '100%', height: '100%'}}/>
                             </Box>
                         </Box>
                         <Box sx={{
@@ -87,68 +87,73 @@ function Template() {
                     </Box>
 
                     <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-                        {acharyas.map((item, index) => (
-                            <Box sx={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                alignItems: "center",
-                                backgroundColor: '#FFF',
-                                borderRadius: '25px',
-                                m: 3,
-                                width: '100%'
-                            }}>
+
+                        <Box sx={{
+                            backgroundColor: '#FFF',
+                            borderRadius: '25px',
+                            m: 3,
+                            width: '100%'
+                        }}>
+                            {acharyas.map((item, index) => (
                                 <Box sx={{
-                                    fontWeight: 600,
-                                    fontSize: '20px',
-                                    lineHeight: '40px',
-                                    p: 2
-                                }}
-                                     key={index + 1}
-                                >
-                                    આચાર્ય : {item.name}
-                                </Box>
-                                <Box sx={{
-                                    fontWeight: 600,
-                                    fontSize: '20px',
-                                    lineHeight: '40px',
-                                    p: 2
-                                }}
-                                     key={index + 1}
-                                >
-                                    {item.number}
-                                </Box>
-                            </Box>
-                        ))}
-                        {adhayax.map((item, index) => (
-                            <Box sx={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                alignItems: "center",
-                                backgroundColor: '#FFF',
-                                borderRadius: '25px',
-                                m: 3,
-                                width: '100%'
-                            }}
-                                 key={index + 1}
-                            >
-                                <Box sx={{
-                                    p: 2,
-                                    fontWeight: 600,
-                                    fontSize: '20px',
-                                    lineHeight: '40px',
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "center",
                                 }}>
-                                    અધ્યક્ષ : {item.name}
+                                    <Box sx={{
+                                        fontWeight: 600,
+                                        fontSize: '20px',
+                                        lineHeight: '40px',
+                                        px: 2
+                                    }}
+                                         key={index + 1}
+                                    >
+                                        આચાર્ય : {item.name}
+                                    </Box>
+                                    <Box sx={{
+                                        fontWeight: 600,
+                                        fontSize: '20px',
+                                        lineHeight: '40px',
+                                        px: 2
+                                    }}
+                                         key={index + 1}
+                                    >
+                                        {item.number}
+                                    </Box>
                                 </Box>
-                                <Box sx={{
-                                    p: 2,
-                                    fontWeight: 600,
-                                    fontSize: '20px',
-                                    lineHeight: '40px',
+                            ))}
+                        </Box>
+                        <Box sx={{
+                            backgroundColor: '#FFF',
+                            borderRadius: '25px',
+                            m: 3,
+                            width: '100%'
+                        }}>
+                            {adhayax.map((item, index) => (
+                                <Box key={index + 1} sx={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "center",
                                 }}>
-                                    {item.number}
+                                    <Box sx={{
+                                        px: 2,
+                                        fontWeight: 600,
+                                        fontSize: '20px',
+                                        lineHeight: '40px',
+                                    }}>
+                                        અધ્યક્ષ : {item.name}
+                                    </Box>
+                                    <Box sx={{
+                                        px: 2,
+                                        fontWeight: 600,
+                                        fontSize: '20px',
+                                        lineHeight: '40px',
+                                    }}>
+                                        {item.number}
+                                    </Box>
                                 </Box>
-                            </Box>
-                        ))}
+                            ))}
+                        </Box>
                     </Box>
 
                     {/* Samiti Section */}
@@ -159,7 +164,6 @@ function Template() {
                                     backgroundColor: '#FFF',
                                     borderRadius: '12px',
                                     p: 2,
-                                    minHeight: '150px'
                                 }}>
                                     <Typography sx={{
                                         fontWeight: 'bold',
