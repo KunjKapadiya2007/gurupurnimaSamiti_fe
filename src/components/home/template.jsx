@@ -1,14 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import {Box, Container, Grid, Typography} from "@mui/material";
+import React, {useEffect, useRef, useState} from 'react';
+import {Box, Button, Container, Grid, Typography} from "@mui/material";
+import html2canvas from "html2canvas";
 import img from '../../assets/home/image 21.png';
 import text from '../../assets/home/Group 979 (1).png';
 import moon from '../../assets/home/Group 978.png';
+import DownloadIcon from '@mui/icons-material/Download';
 import axios from "axios";
 
 function Template() {
     const [data, setData] = useState([]);
     const [acharyas, setAcharyas] = useState([]);
     const [adhayax, setAdhayax] = useState([]);
+    const captureRef = useRef(null);
 
     useEffect(() => {
         handleGet();
@@ -41,10 +44,54 @@ function Template() {
         return acc;
     }, {});
 
+    const handleCapture = async () => {
+        if (!captureRef.current) return;
+
+        html2canvas(captureRef.current, {
+            useCORS: true,  // important for images loaded from external sources
+            allowTaint: true,
+            scrollY: -window.scrollY, // capture full view
+        }).then((canvas) => {
+            const image = canvas.toDataURL("image/png");
+
+            // Create a link and trigger download
+            const link = document.createElement("a");
+            link.href = image;
+            link.download = "capture.png";
+            document.body.appendChild(link); // Append link (required in some browsers)
+            link.click();
+            document.body.removeChild(link); // Clean up
+        }).catch((err) => {
+            console.error("Error capturing canvas:", err);
+        });
+    };
+
     return (
         <Box>
             <Container maxWidth={'lg'}>
-                <Box sx={{backgroundColor: '#3F6F7D'}}>
+                <Button
+                    onClick={handleCapture}
+                    variant="contained"
+                    startIcon={<DownloadIcon />}
+                    sx={{
+                        my: 3,
+                        px: 4,
+                        py: 1.5,
+                        fontSize: '16px',
+                        fontWeight: 'bold',
+                        textTransform: 'none',
+                        borderRadius: '12px',
+                        background: 'linear-gradient(45deg, #00c6ff 30%, #0072ff 90%)',
+                        boxShadow: '0 4px 12px rgba(0, 114, 255, 0.4)',
+                        '&:hover': {
+                            background: 'linear-gradient(45deg, #0072ff 30%, #00c6ff 90%)',
+                            boxShadow: '0 6px 18px rgba(0, 114, 255, 0.6)',
+                        },
+                    }}
+                >
+                    Download Page
+                </Button>
+                <Box ref={captureRef} sx={{backgroundColor: '#3F6F7D'}}>
                     <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
                         <Box>
                             <img src={img}/>
@@ -127,7 +174,7 @@ function Template() {
                             backgroundColor: '#FFF',
                             borderRadius: '25px',
                             m: 3,
-                            width: '100%'
+                            width: '100%',
                         }}>
                             {adhayax.map((item, index) => (
                                 <Box key={index + 1} sx={{
