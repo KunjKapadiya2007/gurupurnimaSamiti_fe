@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Box, Button, Container, Grid, Typography} from "@mui/material";
+import {Box, Button, Container, Typography} from "@mui/material";
 import html2canvas from "html2canvas";
 import img from '../../assets/home/image 21.png';
 import text from '../../assets/home/Group 979 (1).png';
@@ -37,7 +37,6 @@ function Template() {
             .catch((error) => console.log(error));
     }
 
-    // Group samitis without Lodash
     const groupedSamitis = data.reduce((acc, curr) => {
         if (!acc[curr.samiti]) acc[curr.samiti] = [];
         acc[curr.samiti].push(curr);
@@ -48,19 +47,18 @@ function Template() {
         if (!captureRef.current) return;
 
         html2canvas(captureRef.current, {
-            useCORS: true,  // important for images loaded from external sources
+            useCORS: true,
             allowTaint: true,
-            scrollY: -window.scrollY, // capture full view
+            scrollY: -window.scrollY,
         }).then((canvas) => {
             const image = canvas.toDataURL("image/png");
 
-            // Create a link and trigger download
             const link = document.createElement("a");
             link.href = image;
             link.download = "capture.png";
-            document.body.appendChild(link); // Append link (required in some browsers)
+            document.body.appendChild(link);
             link.click();
-            document.body.removeChild(link); // Clean up
+            document.body.removeChild(link);
         }).catch((err) => {
             console.error("Error capturing canvas:", err);
         });
@@ -126,7 +124,7 @@ function Template() {
                                     સમય: સવારે 5 : 00
                                 </Typography>
                                 <Typography sx={{fontSize: '20px', color: '#fff', fontWeight: 600}}>
-                                    સમય: S.M.C કોમ્યુનિટી હોલ, સુદામા ચોક થી ફાયર સ્ટેશન રોડ, વર્ણી પ્લાઝા ની સામે મોટા
+                                    સ્થળ: S.M.C કોમ્યુનિટી હોલ, <br/>સુદામા ચોક થી ફાયર સ્ટેશન રોડ, <br/>વર્ણી પ્લાઝા ની સામે મોટા
                                     વરાછા, સુરત.
                                 </Typography>
                             </Box>
@@ -155,7 +153,7 @@ function Template() {
                                     }}
                                          key={index + 1}
                                     >
-                                        આચાર્ય : {item.name}
+                                        આચાર્યા : {item.name}
                                     </Box>
                                     <Box sx={{
                                         fontWeight: 600,
@@ -188,7 +186,7 @@ function Template() {
                                         fontSize: '20px',
                                         lineHeight: '40px',
                                     }}>
-                                        અધ્યક્ષ : {item.name}
+                                        અધ્યક્ષા : {item.name}
                                     </Box>
                                     <Box sx={{
                                         px: 2,
@@ -203,37 +201,43 @@ function Template() {
                         </Box>
                     </Box>
 
-                    {/* Samiti Section */}
-                    <Grid container spacing={2} sx={{p: 2}}>
+                    {/* Modified samiti boxes section */}
+                    <Box sx={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'flex-start',
+                        gap: '16px',
+                        p: 2
+                    }}>
                         {Object.entries(groupedSamitis).map(([samitiName, members], index) => (
-                            <Grid item size={{xs: 12, sm: 6, md: 4}} key={index}>
-                                <Box sx={{
-                                    backgroundColor: '#FFF',
-                                    borderRadius: '12px',
-                                    p: 2,
+                            <Box key={index} sx={{
+                                flex: '0 0 calc(33.333% - 16px)',
+                                maxWidth: 'calc(33.333% - 16px)',
+                                backgroundColor: '#FFF',
+                                borderRadius: '12px',
+                                p: 2,
+                                boxSizing: 'border-box'
+                            }}>
+                                <Typography sx={{
+                                    fontWeight: 'bold',
+                                    fontSize: '18px',
+                                    color: '#ED174F',
+                                    borderBottom: '2px solid #ED174F',
+                                    pb: 1,
+                                    mb: 1,
+                                    textAlign: 'center'
                                 }}>
-                                    <Typography sx={{
-                                        fontWeight: 'bold',
-                                        fontSize: '18px',
-                                        color: '#ED174F',
-                                        borderBottom: '2px solid #ED174F',
-                                        pb: 1,
-                                        mb: 1,
-                                        textAlign: 'center'
-                                    }}>
-                                        {samitiName}
-                                    </Typography>
-                                    {members.map((member, idx) => (
-                                        <Box key={idx} sx={{display: 'flex', justifyContent: 'space-between', mb: 1}}>
-                                            <Typography
-                                                sx={{fontSize: '16px', fontWeight: 600}}>{member.name}</Typography>
-                                            <Typography sx={{fontSize: '16px'}}>{member.number}</Typography>
-                                        </Box>
-                                    ))}
-                                </Box>
-                            </Grid>
+                                    {samitiName}
+                                </Typography>
+                                {members.map((member, idx) => (
+                                    <Box key={idx} sx={{display: 'flex', justifyContent: 'space-between', mb: 1}}>
+                                        <Typography sx={{fontSize: '16px', fontWeight: 600}}>{member.name}</Typography>
+                                        <Typography sx={{fontSize: '16px'}}>{member.number}</Typography>
+                                    </Box>
+                                ))}
+                            </Box>
                         ))}
-                    </Grid>
+                    </Box>
                 </Box>
             </Container>
         </Box>
