@@ -70,7 +70,7 @@ function Template() {
                 <Button
                     onClick={handleCapture}
                     variant="contained"
-                    startIcon={<DownloadIcon />}
+                    startIcon={<DownloadIcon/>}
                     sx={{
                         my: 3,
                         px: 4,
@@ -120,12 +120,15 @@ function Template() {
                                 <img src={moon}/>
                             </Box>
                             <Box sx={{width: '335px'}}>
-                                <Typography sx={{fontSize: '20px', color: '#fff', fontWeight: 600}}>
+                                <Typography sx={{fontSize: '18px', color: '#fff', fontWeight: 600}}>
                                     સમય: સવારે 5 : 00
                                 </Typography>
-                                <Typography sx={{fontSize: '20px', color: '#fff', fontWeight: 600}}>
-                                    સ્થળ: S.M.C કોમ્યુનિટી હોલ, <br/>સુદામા ચોક થી ફાયર સ્ટેશન રોડ, <br/>વર્ણી પ્લાઝા ની સામે મોટા
-                                    વરાછા, સુરત.
+                                <Typography sx={{fontSize: '18px', color: '#fff', fontWeight: 600, display: 'flex'}}>
+                                    સ્થળ:
+                                    <Typography sx={{fontSize: '18px', color: '#fff', fontWeight: 600,ml:1}}>S.M.C
+                                        કોમ્યુનિટી હોલ, <br/>સુદામા ચોક થી ફાયર સ્ટેશન રોડ, <br/>વર્ણી પ્લાઝા ની સામે
+                                        મોટા
+                                        વરાછા, સુરત.</Typography>
                                 </Typography>
                             </Box>
                         </Box>
@@ -207,7 +210,7 @@ function Template() {
                         flexWrap: 'wrap',
                         justifyContent: 'flex-start',
                         gap: '16px',
-                        p: 2
+                        p: 2,
                     }}>
                         {Object.entries(groupedSamitis).map(([samitiName, members], index) => (
                             <Box key={index} sx={{
@@ -216,7 +219,6 @@ function Template() {
                                 backgroundColor: '#FFF',
                                 borderRadius: '12px',
                                 p: 2,
-                                boxSizing: 'border-box'
                             }}>
                                 <Typography sx={{
                                     fontWeight: 'bold',
